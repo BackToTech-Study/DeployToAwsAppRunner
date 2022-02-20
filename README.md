@@ -21,8 +21,8 @@ If you are missing the desired group you can create one frm the `User groups` op
 
 5. To view the new access key pair, choose Show. You will not have access to the secret access key again after this dialog box closes. Your credentials will look something like this:
 ```
-Access key ID: AKIAIOSFODNN7EXAMPLE
-Secret access key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+  Access key ID: AKIAIOSFODNN7EXAMPLE
+  Secret access key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
 * Or you can download the keys in CSV format
 ![DownloadCrdentials](https://user-images.githubusercontent.com/10427459/154866231-1958f933-2bb6-41ff-aba2-36233a6290da.png)
@@ -30,10 +30,10 @@ Secret access key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 6. To update the local AWS CLI run `aws configure` and insert the required data
 ```
-AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
-AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-Default region name [None]: us-west-2
-Default output format [None]: json
+  AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+  AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+  Default region name [None]: us-west-2
+  Default output format [None]: json
 ```
 
 ## [Create and configure ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html)
@@ -43,37 +43,37 @@ Default output format [None]: json
 2. From the AWS CLI authenticate to ECR. You only need to run this once or after a long period passed and the credentials need an update.
 
 ```
-aws ecr get-login-password --region region | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+  aws ecr get-login-password --region region | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
 ```
 
 3. Create a published release build of your application than build a docker image using that application release build: 
 ```
-dotnet publish --configuration Release
-docker build -t hello-world .
+  dotnet publish --configuration Release
+  docker build -t hello-world .
 ```
 
 In this example the DockerFile simply uses the content of the publish folder:
 ```
-FROM mcr.microsoft.com/dotnet/aspnet:4.0
-WORKDIR /app
-EXPOSE 9090
+  FROM mcr.microsoft.com/dotnet/aspnet:4.0
+  WORKDIR /app
+  EXPOSE 9090
 
-ENV ASPNETCORE_URLS="http://+:9090"
-ENV ASPNETCORE_ENVIRONMENT: Production
+  ENV ASPNETCORE_URLS="http://+:9090"
+  ENV ASPNETCORE_ENVIRONMENT: Production
 
-COPY bin/Release/net4.0/publish . 
-ENTRYPOINT ["dotnet", "hello-world.dll"]
+  COPY bin/Release/net4.0/publish . 
+  ENTRYPOINT ["dotnet", "hello-world.dll"]
 ```
 
 
 4. Tag the image:
 ```
-docker tag hello-world:latest aws_account_id.dkr.ecr.region.amazonaws.com/hello-world:latest
+  docker tag hello-world:latest aws_account_id.dkr.ecr.region.amazonaws.com/hello-world:latest
 ```
 
 5. Push the image:
 ```
-docker push aws_account_id.dkr.ecr.region.amazonaws.com/hello-world:latest
+  docker push aws_account_id.dkr.ecr.region.amazonaws.com/hello-world:latest
 ```
 
 ## App runner
